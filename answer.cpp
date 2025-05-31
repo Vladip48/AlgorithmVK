@@ -18,11 +18,11 @@ struct IGraph {
     virtual std::vector<int> GetPrevVertices(int vertex) const = 0;
 };
 
-struct ListGraph : public IGraph {
+struct ListGraph: public IGraph {
 public:
-    ListGraph(int size) : adjacencyLists(size) {}
+    ListGraph(int size): adjacencyLists(size) {}
 
-    ListGraph(const IGraph& graph) {
+    ListGraph(const IGraph &graph) {
         adjacencyLists.resize(graph.VerticesCount());
         for (int i = 0; i < graph.VerticesCount(); ++i) {
             adjacencyLists[i] = graph.GetNextVertices(i);
@@ -63,11 +63,11 @@ private:
     std::vector<std::vector<int>> adjacencyLists;
 };
 
-class MatrixGraph : public IGraph {
+class MatrixGraph: public IGraph {
 public:
-    MatrixGraph(int size) : adjacencyMatrix(size, std::vector<bool>(size, false)) {}
+    MatrixGraph(int size): adjacencyMatrix(size, std::vector<bool>(size, false)) {}
 
-    MatrixGraph(const IGraph& graph) {
+    MatrixGraph(const IGraph &graph) {
         int size = graph.VerticesCount();
         adjacencyMatrix.resize(size, std::vector<bool>(size, false));
         for (int from = 0; from < size; ++from) {
@@ -113,7 +113,7 @@ private:
     std::vector<std::vector<bool>> adjacencyMatrix;
 };
 
-class SetGraph : public IGraph {
+class SetGraph: public IGraph {
 public:
     SetGraph(int size) : adjacencySets(size) {}
 
@@ -156,9 +156,9 @@ private:
     std::vector<std::unordered_set<int>> adjacencySets;
 };
 
-class ArcGraph : public IGraph {
+class ArcGraph: public IGraph {
 public:
-    ArcGraph(int size) : verticesCount(size) {}
+    ArcGraph(int size): verticesCount(size) {}
 
     ArcGraph(const IGraph &graph) {
         verticesCount = graph.VerticesCount();
